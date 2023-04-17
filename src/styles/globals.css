@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-color: #13101F;
+  --imp-color: #DB164F;
+  --scnd-color: #89878F;
+  --txt-hover-color: #ffffff;
+}
+
 * {
   box-sizing: border-box;
   color: white;
@@ -11,7 +18,7 @@ body {
   overflow-x: hidden;
   width: 100dvw;
   min-height: 100dvh;
-  background-color: #13101F;
+  background-color: var(--bg-color);
 }
 
 a:visited {

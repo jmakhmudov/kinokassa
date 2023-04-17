@@ -4,8 +4,15 @@ import styles from '@/styles/Home.module.css'
 import { supabase } from '@/supabase'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import { Carousel } from 'flowbite-react'
+import { useRouter } from 'next/router'
 
 export default function Home({ movieData }) {
+  const router = useRouter()
+
+  const handleClick = (path) => {
+    router.push(`/${path}`)
+  }
 
   return (
     <>
@@ -17,21 +24,39 @@ export default function Home({ movieData }) {
       </Head>
       <main className={styles.main}>
         <Navbar />
-        {
-          movieData.map(movie => {
-            return (
-              <Link key={movie.id} href={movie.id}>
-                <div className='carousel-card'>
-                  <img src={movie.preview} alt={movie.nameRu} />
-                  <div className='carousel-info'>
-                    <h1>{movie.nameRu}</h1>
-                    <p>{movie.year}</p>
+
+        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 main-carousel">
+          <Carousel
+            leftControl=" "
+            rightControl=" "
+            slide={true}
+            slideInterval={5000}
+          >
+            {
+              movieData.map(movie => {
+                return (
+                  <div key={movie.id} onClick={() => handleClick(movie.id)}>
+                    <div className={styles.carouselCard}>
+                      <img src={movie.mainPreview} alt={movie.nameRu} />
+
+                      <div className={styles.shadowOverlay}></div>
+
+                      <div className={styles.carouselInfo}>
+                        <div>{movie.nameRu}</div>
+                        <p>{movie.year} | {movie.nameOriginal}</p>
+                        <Link className='actionBtn' href={`/showtimes/${movie.id}`}>
+                          Ближайшие сеансы
+                        </Link>
+                      </div>
+                      
+                    </div>
                   </div>
-                </div>
-              </Link>
-            )
-          })
-        }
+                )
+              })
+            }
+          </Carousel>
+        </div>
+
       </main>
     </>
   )
@@ -65,7 +90,8 @@ export async function getServerSideProps() {
           poster: json.posterUrl,
           genres: json.genres,
           year: json.year,
-          filmLength: json.filmLength
+          filmLength: json.filmLength,
+          mainPreview: movie.preview_url,
         }
         movieData.push(movieInfo)
       })

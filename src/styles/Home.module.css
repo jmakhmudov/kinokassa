@@ -1,0 +1,37 @@
+.carouselInfo {
+    position: absolute;
+    bottom: 180px;
+    left: 6dvw;
+    max-width: 40dvw;
+}
+
+.carouselCard {
+    height: 500px;
+    width: 1000dvw;
+}
+
+.carouselCard img {
+    width: 100dvw;
+    height: 500px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.shadowOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 500px;
+    background: radial-gradient(84.65% 568.44% at 15.35% 49.89%, rgba(19, 16, 31, 0.74) 31.25%, rgba(255, 255, 255, 0) 100%);
+}
+
+.carouselInfo div {
+    font-weight: 700;
+    font-size: 42px;
+}
+
+.carouselInfo p {
+    margin-bottom: 30px;
+}
+

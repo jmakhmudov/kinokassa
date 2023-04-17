@@ -11,28 +11,77 @@
     padding: 1.8dvh 5dvw;
 }
 
+.menu-bar {
+    display: none;
+}
+
+.navlinks-mob {
+    width: 100dvw;
+    background: var(--imp-color);
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    right: -100dvw;
+    transition: 0.5s;
+}
+
+.navlinks-mob {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+}
+
+.navlinks-mob>a {
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 5vw;
+}
+
 .logo {
     font-weight: 700;
     font-size: 28px;
-    color: #DB164F;
+    color: var(--imp-color);
 }
 
 .navbar .navlinks {
-    width: 25dvw;
+    width: 30dvw;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #89878F;
+    color: var(--scnd-color);
 }
 
 .navbar .navlinks a:hover {
-    color: white;
+    color: var(--txt-hover-color);
 }
 
 .actionBtn {
-    background-color: #DB164F;
+    background-color: var(--imp-color);
     font-weight: 600;
     padding: 8px 30px;
     border-radius: 5px;
     text-align: center;
+}
+
+.main-carousel {
+    margin-top: 100px;
+    height: 500px;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar .navlinks,
+    .navbar .actionBtn {
+        display: none;
+    }
+
+    .navbar .menu-bar {
+        display: block;
+    }
 }
