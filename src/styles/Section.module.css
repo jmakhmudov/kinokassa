@@ -1,0 +1,49 @@
+.sectionBox {
+    padding: 50px 5dvw;
+}
+
+.cardImg {
+    width: 200px;
+    aspect-ratio: 2/3;
+    position: relative;
+    object-fit: contain;
+}
+
+.cardInfo {
+    margin-top: 10px;
+}
+
+.cardBox {
+    width: 200px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cardBox:hover {
+    scale: 1.05;
+}
+
+.sectionName {
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.cardName {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardDescription {
+    color: var(--scnd-color);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.cardList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 200px));
+    grid-gap: 40px;
+}

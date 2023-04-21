@@ -6,8 +6,10 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import { Carousel } from 'flowbite-react'
 import { useRouter } from 'next/router'
+import Section from '@/components/Section'
+import Footer from '@/components/Footer'
 
-export default function Home({ movieData }) {
+export default function Home({ movieData, cinemas }) {
   const router = useRouter()
 
   const handleClick = (path) => {
@@ -48,7 +50,7 @@ export default function Home({ movieData }) {
                           Ближайшие сеансы
                         </Link>
                       </div>
-                      
+
                     </div>
                   </div>
                 )
@@ -57,18 +59,38 @@ export default function Home({ movieData }) {
           </Carousel>
         </div>
 
+        <Section title="Кинотеатры" data={cinemas} cinemas={true} />
+        <Section title="Премьеры" data={movieData} cinemas={false} />
+
+        <Footer />
       </main>
     </>
   )
 }
 
-export async function getServerSideProps() {
-  const movieData = []
 
+async function getMovies() {
   let { data: movies, error } = await supabase
     .from('movies')
     .select('*')
   if (error) console.log(error)
+  
+  return movies
+}
+
+async function getCinemas() {
+  let { data: cinemas, error } = await supabase
+    .from('cinemas')
+    .select('*')
+  if (error) console.log(error)
+  
+  return cinemas
+}
+
+export async function getServerSideProps() {
+  const movieData = []
+  const movies = await getMovies()
+  const cinemas = await getCinemas()
 
   const promises = movies.map((movie) => {
     return fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${movie.kinopoisk_id}`, {
@@ -100,6 +122,6 @@ export async function getServerSideProps() {
 
   await Promise.all(promises)
 
-  return { props: { movieData } }
+  return { props: { movieData, cinemas } }
 }
 
