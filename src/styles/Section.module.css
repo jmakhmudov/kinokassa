@@ -17,6 +17,8 @@
     width: 200px;
     cursor: pointer;
     transition: 0.3s;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .cardBox:hover {

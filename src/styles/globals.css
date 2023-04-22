@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #13101F;
-  --imp-color: #DB164F;
+  --bg-color: #020009;
+  --imp-color: #724BF4;
   --scnd-color: #89878F;
   --txt-hover-color: #ffffff;
 }
