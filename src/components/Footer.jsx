@@ -58,7 +58,7 @@ export default function Footer() {
         return (
             <section className={styles.section}>
                 <div className={styles.sectionName}>
-                    {data.title}
+                    {data.name}
                 </div>
 
                 <ul>
@@ -77,10 +77,25 @@ export default function Footer() {
     }
 
     return (
-        <section>
-            {
-                sections.map(section => footerSection(section))
-            }
+        <section className={styles.footer}>
+            <section className={styles.sections}>
+                {
+                    sections.map(section => footerSection(section))
+                }
+            </section>
+
+            <hr />
+            <section className={styles.copyright}>
+                
+                <div>
+                    © 2023 — 2023, KINOKASSA
+                </div>
+
+                <div>
+                    Проект компании <span>ONEGATE</span>
+                </div>
+                
+            </section>
         </section>
     )
 }
