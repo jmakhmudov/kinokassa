@@ -24,7 +24,7 @@ export default function Home({ movieData, cinemas }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main>
         <Navbar />
 
         <div className="h-56 sm:h-64 xl:h-80 2xl:h-96 main-carousel">
@@ -39,12 +39,12 @@ export default function Home({ movieData, cinemas }) {
                 return (
                   <div key={movie.id} onClick={() => handleClick(movie.id)}>
                     <div className={styles.carouselCard}>
-                      <img src={movie.mainPreview} alt={movie.nameRu} />
+                      <img src={movie.mainPreview} alt={movie.name} />
 
                       <div className={styles.shadowOverlay}></div>
 
                       <div className={styles.carouselInfo}>
-                        <div>{movie.nameRu}</div>
+                        <div>{movie.name}</div>
                         <p>{movie.year} | {movie.nameOriginal}</p>
                         <Link className='actionBtn' href={`/showtimes/${movie.id}`}>
                           Ближайшие сеансы
@@ -93,7 +93,7 @@ export async function getServerSideProps() {
   const cinemas = await getCinemas()
 
   const promises = movies.map((movie) => {
-    return fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${movie.kinopoisk_id}`, {
+    return fetch(`https://api.kinopoisk.dev/v1/movie/${movie.kinopoisk_id}`, {
       method: 'GET',
       headers: {
         'X-API-KEY': process.env.KINOPOISK_TOKEN,
@@ -104,16 +104,16 @@ export async function getServerSideProps() {
       .then(json => {
         const movieInfo = {
           id: movie.id,
-          nameRu: json.nameRu,
-          nameOriginal: json.nameOriginal,
+          name: json.name,
+          nameOriginal: json.alternativeName,
           description: json.description,
-          ratingImdb: json.ratingImdb,
-          preview: json.posterUrlPreview,
-          poster: json.posterUrl,
+          posters: json.poster,
           genres: json.genres,
+          trailers: json.videos.trailers,
+          movieLength: json.movieLength,
+          rating: json.rating.imdb,
           year: json.year,
-          filmLength: json.filmLength,
-          mainPreview: movie.preview_url,
+          mainPreview: movie.preview_url
         }
         movieData.push(movieInfo)
       })

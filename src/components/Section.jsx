@@ -34,16 +34,16 @@ export default function Section({ title, data, cinemas }) {
                                 :
                                 <div key={card.id} onClick={() => handleClick(card.id, false)} className={styles.cardBox}>
                                     <div className={styles.cardImg}>
-                                        <Image src={card.preview} layout='fill' />
+                                        <Image src={card.posters.previewUrl} layout='fill' />
                                     </div>
 
                                     <section className={styles.cardInfo}>
                                         <div className={styles.cardName}>
-                                            {card.nameRu}
+                                            {card.name}
                                         </div>
 
                                         <div className={styles.cardDescription}>
-                                            {card.year} | {card.filmLength} мин
+                                            {card.year} | {card.movieLength} мин
                                         </div>
                                     </section>
                                 </div>

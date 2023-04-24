@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['kinopoiskapiunofficial.tech'],
+    domains: ['kinopoiskapiunofficial.tech', "st.kp.yandex.net"],
   },
 }
 
