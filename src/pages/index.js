@@ -12,8 +12,11 @@ import Footer from '@/components/Footer'
 export default function Home({ movieData, cinemas }) {
   const router = useRouter()
 
-  const handleClick = (id) => {
-    router.push(`/premieres/${id}`)
+  const handleClick = (movie) => {
+    router.push({
+      pathname: `/premieres/${movie.id}`,
+      query: { data: JSON.stringify(movie) }
+    }, `/premieres/${movie.id}`)
   }
 
   return (
@@ -37,7 +40,7 @@ export default function Home({ movieData, cinemas }) {
             {
               movieData.map(movie => {
                 return (
-                  <div key={movie.id} onClick={() => handleClick(movie.id)}>
+                  <div key={movie.id} onClick={() => handleClick(movie)}>
                     <div className={styles.carouselCard}>
                       <img src={movie.mainPreview} alt={movie.name} />
 
@@ -46,7 +49,11 @@ export default function Home({ movieData, cinemas }) {
                       <div className={styles.carouselInfo}>
                         <div>{movie.name}</div>
                         <p>{movie.year} | {movie.nameOriginal}</p>
-                        <Link className='actionBtn' href={`/showtimes/${movie.id}`}>
+                        <Link className='actionBtn' key={movie.id}
+                          href={{
+                            pathname: `/showtimes/${movie.id}`,
+                            query: { data: JSON.stringify(movie) }
+                          }}>
                           Ближайшие сеансы
                         </Link>
                       </div>
@@ -74,7 +81,7 @@ async function getMovies() {
     .from('movies')
     .select('*')
   if (error) console.log(error)
-  
+
   return movies
 }
 
@@ -83,7 +90,7 @@ async function getCinemas() {
     .from('cinemas')
     .select('*')
   if (error) console.log(error)
-  
+
   return cinemas
 }
 

@@ -1,9 +1,31 @@
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import Head from "next/head"
+import YouTubePlayer from "react-youtube";
+import { useRouter } from "next/router";
+
+function getVideoIdFromUrl(url) {
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const match = url.match(regex);
+
+  return match && match[1];
+}
+
+const videoUrl = 'S5TB81y7yoo';
+
+const opts = {
+  playerVars: {
+    autoplay: 1,
+    controls: 1,
+  },
+};
+
 
 export default function Movie() {
-
+  const router = useRouter()
+  const { data } = router.query;
+  console.log(data)
+  const movie = JSON.parse(data)
 
   return (
     <>
@@ -16,6 +38,10 @@ export default function Movie() {
       <main>
         <Navbar />
 
+        <h1>{movie.name}</h1>
+        <h1>{movie.name}</h1>
+        <h1>{movie.name}</h1>
+        <h1>{movie.name}</h1>
         <Footer />
       </main>
     </>

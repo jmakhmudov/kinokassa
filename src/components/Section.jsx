@@ -5,8 +5,13 @@ import { useRouter } from 'next/router'
 export default function Section({ title, data, cinemas }) {
     const router = useRouter()
 
-    const handleClick = (id, cinema) => {
-        cinema ? router.push(`/cinemas/${id}`) :router.push(`/premieres/${id}`)
+    const handleClick = (cinema, cardData) => {
+        const url = cinema ? `/cinemas/${cardData.id}` : `/premieres/${cardData.id}`
+
+        router.push({
+            pathname: url,
+            query: { data: JSON.stringify(cardData) }
+        }, url)
     }
 
     return (
@@ -20,7 +25,7 @@ export default function Section({ title, data, cinemas }) {
                     data.map((card) => {
                         return (
                             cinemas ?
-                                <div onClick={() => handleClick(card.id, true)} key={card.id} className={styles.cardBox}>
+                                <div onClick={() => handleClick(true, card)} key={card.id} className={styles.cardBox}>
                                     <div className={styles.cardImg}>
                                         <Image src={card.logo_url} layout='fill' />
                                     </div>
@@ -32,7 +37,7 @@ export default function Section({ title, data, cinemas }) {
                                     </section>
                                 </div>
                                 :
-                                <div key={card.id} onClick={() => handleClick(card.id, false)} className={styles.cardBox}>
+                                <div key={card.id} onClick={() => handleClick(false, card)} className={styles.cardBox}>
                                     <div className={styles.cardImg}>
                                         <Image src={card.posters.previewUrl} layout='fill' />
                                     </div>
