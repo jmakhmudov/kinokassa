@@ -2,30 +2,19 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import Head from "next/head"
 import YouTubePlayer from "react-youtube";
-import { useRouter } from "next/router";
 
-function getVideoIdFromUrl(url) {
-  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-  const match = url.match(regex);
+export default function Movie(props) {
+  console.log(props)
+  const movie = props
 
-  return match && match[1];
-}
+  const videoUrl = movie.trailers[0].url.slice(-11)
 
-const videoUrl = 'S5TB81y7yoo';
-
-const opts = {
-  playerVars: {
-    autoplay: 1,
-    controls: 1,
-  },
-};
-
-
-export default function Movie() {
-  const router = useRouter()
-  const { data } = router.query;
-  console.log(data)
-  const movie = JSON.parse(data)
+  const opts = {
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+    },
+  };
 
   return (
     <>
@@ -42,8 +31,15 @@ export default function Movie() {
         <h1>{movie.name}</h1>
         <h1>{movie.name}</h1>
         <h1>{movie.name}</h1>
+        <YouTubePlayer opts={opts} videoId={videoUrl} />
         <Footer />
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async (context) => {
+  const { data } = context.query
+
+  return { props: JSON.parse(data) }
 }
