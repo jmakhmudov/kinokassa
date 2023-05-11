@@ -35,3 +35,20 @@
     margin-bottom: 30px;
 }
 
+@media screen and (max-width: 767px) {
+    .carouselInfo {
+        max-width: 80dvw;  
+        display: grid;
+        place-items: center; 
+        align-items: center;  
+    }
+
+    .carouselInfo div {
+        font-size: 34px;
+        text-align: center;
+    }
+
+    .carouselInfo p {
+        font-size: 14px;
+    }
+}

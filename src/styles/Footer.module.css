@@ -49,3 +49,23 @@
 .copyright div {
     font-size: 14px;
 }
+
+.copyright .onegate {
+    text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+    .sections {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sections .section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .copyright div{
+        font-size: 12px;
+    }
+}

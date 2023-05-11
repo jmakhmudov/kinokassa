@@ -2,19 +2,21 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import Head from "next/head"
 import YouTubePlayer from "react-youtube";
+import { useRouter } from "next/router";
 
 export default function Movie(props) {
-  console.log(props)
-  const movie = props
+  const router = useRouter()
+  const { movieId } = router.query
+  console.log(movieId)
 
-  const videoUrl = movie.trailers[0].url.slice(-11)
+  // const videoUrl = movie.trailers[0].url.slice(-11)
 
-  const opts = {
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-    },
-  };
+  // const opts = {
+  //   playerVars: {
+  //     autoplay: 1,
+  //     controls: 0,
+  //   },
+  // };
 
   return (
     <>
@@ -27,19 +29,13 @@ export default function Movie(props) {
       <main>
         <Navbar />
 
+        {/* <h1>{movie.name}</h1>
         <h1>{movie.name}</h1>
         <h1>{movie.name}</h1>
         <h1>{movie.name}</h1>
-        <h1>{movie.name}</h1>
-        <YouTubePlayer opts={opts} videoId={videoUrl} />
+        <YouTubePlayer opts={opts} videoId={videoUrl} /> */}
         <Footer />
       </main>
     </>
   )
-}
-
-export const getServerSideProps = async (context) => {
-  const { data } = context.query
-
-  return { props: JSON.parse(data) }
 }

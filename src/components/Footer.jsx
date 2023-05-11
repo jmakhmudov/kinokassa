@@ -91,7 +91,7 @@ export default function Footer() {
                     © 2023 — 2023, KINOKASSA
                 </div>
 
-                <div>
+                <div className={styles.onegate}>
                     Проект компании <span>ONEGATE</span>
                 </div>
                 
