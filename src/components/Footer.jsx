@@ -64,7 +64,7 @@ export default function Footer() {
                 <ul>
                     {
                         subsections.map((subsection) => (
-                            <li>
+                            <li key={subsection.name}>
                                 <Link href={subsection.href}>
                                     {subsection.name}
                                 </Link>
